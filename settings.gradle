@@ -1,0 +1,4 @@
+rootProject.name = 'g525WithAttachmentable'
+include 'coreGrailsApp'
+include 'g5attachmentable'
+
