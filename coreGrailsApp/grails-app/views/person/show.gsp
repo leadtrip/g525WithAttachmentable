@@ -1,53 +1,69 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
-    <div id="content" role="main">
-        <div class="container">
-            <section class="row">
-                <a href="#show-person" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-                <div class="nav" role="navigation">
-                    <ul>
-                        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-                    </ul>
-                </div>
-            </section>
-            <section class="row">
-                <div id="show-person" class="col-12 content scaffold-show" role="main">
-                    <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-                    <g:if test="${flash.message}">
-                    <div class="message" role="status">${flash.message}</div>
-                    </g:if>
-                    <f:display bean="person" />
-                    <g:form resource="${this.person}" method="DELETE">
-                        <fieldset class="buttons">
-                            <g:link class="edit" action="edit" resource="${this.person}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                            <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                        </fieldset>
-                    </g:form>
-                </div>
-            </section>
-        </div>
-    </div>
-    <ul>
+<head>
+    <meta name="layout" content="main" />
+    <title>Show person</title>
+</head>
 
-        Total: <attachments:total bean="${person}"/>
+<body>
+    <div class="container">
 
-        <attachments:each bean="${person}" inputNames="attachment">
-            <li><attachments:deleteLink
-                    attachment="${attachment}"
-                    returnPageURI="${createLink(action: actionName, id: person.id)}"
-            >[X]</attachments:deleteLink>
-                <attachments:downloadLink
+        <section class="row" style="padding-top: 10px">
+            <div class="border border-info rounded">
+                <g:if test="${person.attachments}">
+                    Click an attachment icon to view the Attachment domain details, click the [X] to delete the attachment or click the filename to download the file
+                </g:if>
+                <g:else>
+                    Select choose files and add as many attachments as you like then upload
+                </g:else>
+            </div>
+        </section>
+
+        <div id="updateRes"></div>
+
+        <ol class="property-list">
+            <li class="fieldcontain">
+                <span class="property-label">Name</span>
+                <span class="property-value">${person.fullName()}</span>
+            </li>
+
+            <li class="fieldcontain">
+                <span class="property-label">Total attachments</span>
+                <span class="property-value"><attachments:total bean="${person}"/></span>
+            </li>
+
+            <attachments:each bean="${person}" inputNames="attachment">
+                <li class="fieldcontain">
+                    <span class="property-label">
+                        <g:link action="showAttachment" id="${attachment.id}">
+                            <attachments:icon attachment="${attachment}" />
+                        </g:link>
+                    </span>
+                    <span class="property-value">
+                    <attachments:deleteLink
                         attachment="${attachment}"
-                        withContentType="true"/></li>
-        </attachments:each>
-    </ul>
-    </body>
+                        returnPageURI="${createLink(action: actionName, id: person.id)}">[X]
+                    </attachments:deleteLink>
+                    <attachments:downloadLink
+                            attachment="${attachment}"
+                            withContentType="true"/>
+                    </span>
+                </li>
+            </attachments:each>
+            <li class="fieldcontain">
+                <span class="property-label"></span>
+                <span class="property-value">
+                    <attachments:uploadForm
+                            bean="${person}"
+                            styleClass="uploadFormContainer"/>
+                    <attachments:script
+                            updateInterval="100"
+                            updateElemId="updateRes"
+                            redirect="${createLink(action: actionName, id: person.id)}"/>
+                </span>
+            </li>
+
+        </ol>
+    </div>
+</body>
 </html>
