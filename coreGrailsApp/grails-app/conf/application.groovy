@@ -1,1 +1,1 @@
-grails.attachmentable.poster.evaluator = { "unknown" }
+grails.attachmentable.poster.evaluator = { "mike" }

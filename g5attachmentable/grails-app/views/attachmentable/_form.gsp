@@ -10,7 +10,7 @@
 
     <g:hiddenField name="attachmentLink.referenceClass" value="${attachmentable.class.name}"/>
     <g:hiddenField name="attachmentLink.referenceId" value="${attachmentable.id}"/>
-    <input type="file" id="${inputName}" name="${inputName}"/>
+    <input type="file" id="${inputName}" name="${inputName}" multiple class="multi"/>
 
     <g:submitButton name="${g.message(code:'attachment.upload.button.name', 'default': 'Upload')}"/>
 </g:form>
