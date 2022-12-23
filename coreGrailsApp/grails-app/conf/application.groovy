@@ -1,0 +1,1 @@
+grails.attachmentable.poster.evaluator = { "unknown" }

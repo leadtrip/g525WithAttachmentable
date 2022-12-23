@@ -8,6 +8,8 @@ grails:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
+    attachmentable:
+        maxInMemorySize: 1024
 info:
     app:
         name: '@info.app.name@'

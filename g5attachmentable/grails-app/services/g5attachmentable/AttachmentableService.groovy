@@ -17,13 +17,17 @@ package g5attachmentable
 
 import g5attachmentable.core.exceptions.AttachmentableException
 import g5attachmentable.core.exceptions.EmptyFileException
+import g5attachmentable.util.AttachmentableUtil
+import grails.gorm.transactions.Transactional
 import grails.orm.PagedResultList
 import org.apache.commons.io.FilenameUtils
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 import java.lang.reflect.UndeclaredThrowableException
 
+@Transactional
 class AttachmentableService {
 
     def grailsApplication
@@ -177,7 +181,7 @@ class AttachmentableService {
                     cnt++
                     AttachmentableUtil.delete(file)
                 }
-            } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            } catch (DataIntegrityViolationException e) {
                 log.error "Error deleting attachments: ${e.message}"
             }
 
@@ -202,7 +206,7 @@ class AttachmentableService {
             AttachmentableUtil.delete(file)
             removeUnusedLinks()
             return true
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             log.error "Error deleting attachment: ${e.message}"
         }
 
@@ -230,7 +234,7 @@ class AttachmentableService {
                 attachment.delete(flush: true)
                 cnt++
                 AttachmentableUtil.delete(file)
-            } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            } catch (DataIntegrityViolationException e) {
                 log.error "Error deleting attachments: ${e.message}"
             }
         }
