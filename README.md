@@ -12,4 +12,4 @@ Versions are:
 * jquery-MultiFile - v1.46
 * jquery-form - 2.43
 
-If you just swap out the version of jquery for the version bundled with grails 5 (3.5.1) this doesn't work, you need to update the other jquery plugins, see the latest_jquery branch. 
+If you just swap out the version of jquery for the version bundled with grails 5 (3.5.1) this doesn't work, you need to update the other jquery plugins, see the [latest_jquery](https://github.com/leadtrip/g525WithAttachmentable/tree/latest_jquery) branch. 
