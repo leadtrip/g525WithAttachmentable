@@ -98,10 +98,10 @@ class AttachmentsTagLib {
     // FORM
     
     def style = {attrs ->
-    def plugin = (attrs.plugin!=false) ? "attachmentable" : ""
-        out << g.render(
-                template: '/attachmentable/resources/style',
-                plugin: plugin)
+        def plugin = (attrs.plugin!=false) ? "attachmentable" : ""
+            out << g.render(
+                    template: '/attachmentable/resources/style',
+                    plugin: plugin)
     }
 
     def progressBar = {

@@ -31,7 +31,7 @@ class AttachmentLink {
     }
 
     def getReference() {
-        getClass().classLoader.loadClass(referenceClass).get(referenceId)
+        getClass().classLoader.loadClass(referenceClass).findById(referenceId)
     }
 
 }

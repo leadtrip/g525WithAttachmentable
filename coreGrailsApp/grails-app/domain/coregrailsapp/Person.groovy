@@ -1,17 +1,22 @@
-package g5attachmentable.test
+package coregrailsapp
 
 import g5attachmentable.Attachment
 import g5attachmentable.core.Attachmentable
 
+class Person implements Attachmentable {
 
-class TestEntry implements Attachmentable {
+    String forename
+    String surname
+    Date dob
 
-    String title
+    String fullName() {
+        "${forename} ${surname}"
+    }
 
-    String toString() { "$title" }
+    static constraints = {
+    }
 
     def onAddAttachment = { Attachment attachment ->
         println attachment.inputName + ' ' + attachment.filename
     }
-
 }

@@ -6,5 +6,4 @@
 // to create separate JavaScript files as needed.
 //
 
-
 //= require_self
